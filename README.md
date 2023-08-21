@@ -21,6 +21,17 @@ JWT_SECRET=deviscoding
 Run the project:
 node server.js
 
+# Example request:
+POST-> https://stack-overflow-backend-gjfm.onrender.com/api/v1/signup <br>
+Request body: 
+{
+    "name": "test",
+    "username": "test-final",
+    "email": "abc9@gmail.com",
+    "password": "123",
+    "contactno": 9824700091
+}
+
 # Key Points about this Project:
 -> Deployed <br>
 -> Implemented JWT Authentication<br>
