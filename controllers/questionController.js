@@ -1,12 +1,13 @@
 const Question = require("../models/Question");
 const User = require("../models/User");
+const validateVoteType = require("../utils/validation");
 
 const createQuestion = async (req, res) => {
   try {
     const { title, description } = req.body;
     const user_id = req.user.id;
     console.log("Creating...", req.user);
-    
+
     const question = await Question.create({
       title,
       description,
@@ -145,7 +146,7 @@ const voteQuestion = async (req, res) => {
 
     if (voteIdx !== -1) {
       // Check if user is changing voteType
-      if (voteType === user.voteList[voteIdx].voteType) {
+      if (validateVoteType(voteType)) {
         flag = true;
 
         return res.status(401).json({
