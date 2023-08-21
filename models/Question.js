@@ -20,14 +20,18 @@ const questionSchema = Schema(
       type: Number,
       default: 0,
     },
-    answers: [{
-      type: Schema.Types.ObjectId,
-      ref: "Answer"
-    }],
-    comments: [{
+    answers: [
+      {
         type: Schema.Types.ObjectId,
-        ref: "Comment"
-      }]
+        ref: "Answer",
+      },
+    ],
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
   },
   { timestamps: true }
 );
