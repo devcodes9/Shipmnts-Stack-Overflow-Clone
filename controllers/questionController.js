@@ -146,7 +146,7 @@ const voteQuestion = async (req, res) => {
 
     if (voteIdx !== -1) {
       // Check if user is changing voteType
-      if (validateVoteType(voteType)) {
+      if (!voteType || (voteType !== "upvote" && voteType !== "downvote")) {
         flag = true;
 
         return res.status(401).json({
