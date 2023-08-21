@@ -1,13 +1,19 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require("dotenv");
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const authRouter = require('./routes/authRouter')
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
+
+app.use("/api/v1", authRouter);
 
 const connect = async () => {
   try{
