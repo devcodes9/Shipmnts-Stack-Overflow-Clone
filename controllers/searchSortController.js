@@ -62,28 +62,4 @@ const searchQuestions = async (req, res) => {
   }
 };
 
-// this returns questions which contain the searched query
-// const searchAnswers = async (query) => {
-//   try {
-//     console.log(query)
-//     const searchResults = await Answer.find({
-//       text: { $regex: query, $options: "i" },
-//     }).populate("question")
-//     .exec();
-//     console.log(searchResults)
-//     const questionsFromAnswers = searchResults.map(answer => answer.question);
-//     console.log("Fromans", questionsFromAnswers)
-//     return {
-//       success: true,
-//       message: "Search results fetched successfully",
-//       data: questionsFromAnswers
-//     }
-//   } catch (err) {
-//     return {
-//       success: false,
-//       message: err.message,
-//     };
-//   }
-// };
-
 module.exports = { searchQuestions };

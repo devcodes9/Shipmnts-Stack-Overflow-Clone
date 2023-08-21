@@ -8,6 +8,7 @@ const questionRouter = require("./routes/questionRouter");
 const answerRouter = require("./routes/answerRouter");
 const commentRouter = require("./routes/commentRouter");
 const searchSortRouter = require("./routes/searchSortRouter");
+const mainRouter = require("./routes/mainRouter");
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
+app.use("/", mainRouter)
 app.use("/api/v1", authRouter);
 app.use("/api/v1/question", questionRouter);
 app.use("/api/v1/answer", answerRouter);
