@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const authRouter = require('./routes/authRouter')
 const questionRouter = require("./routes/questionRouter");
+const answerRouter = require("./routes/answerRouter");
+
 dotenv.config();
 
 const app = express();
@@ -16,6 +18,7 @@ app.use(cors());
 
 app.use("/api/v1", authRouter);
 app.use("/api/v1/question", questionRouter);
+app.use("/api/v1/answer", answerRouter);
 
 const connect = async () => {
   try{

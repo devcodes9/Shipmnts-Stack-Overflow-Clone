@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const  Question = require("../models/Question");
+const Question = require("../models/Question");
 
 const auth = async (req, res, next) => {
   try {
@@ -8,7 +8,7 @@ const auth = async (req, res, next) => {
       req.body.token ||
       req.header("Authorization").replace("Bearer ", "");
 
-      console.log(token);
+    console.log(token);
     if (!token) {
       return res
         .status(401)
@@ -33,34 +33,34 @@ const auth = async (req, res, next) => {
 };
 
 const verifyQuestionOperation = async (req, res, next) => {
-    try {
-      const user = req.user;
-      const id = req.params.id;
-      const questionDoc = await Question.findById(id);
-        console.log(questionDoc)
-        
-      if (!questionDoc) {
-        return res.status(401).json({
-          success: false,
-          message: "Question not found",
-        });
-      }
-      console.log("Verify", questionDoc.user)
-      console.log(questionDoc.user.toString() !== user.id)
-      if(questionDoc.user.toString() !== user.id){
-          return res.status(500).json({
-              success: false,
-              message: "You are not authorized to update or delete this question",
-          });
-      }
-  
-      next();
-    } catch (err) {
+  try {
+    const user = req.user;
+    const id = req.params.id;
+    const questionDoc = await Question.findById(id);
+    console.log(questionDoc);
+
+    if (!questionDoc) {
       return res.status(401).json({
-          success: false,
-          message: err.message
-        });
+        success: false,
+        message: "Question not found",
+      });
     }
-  };
+    console.log("Verify", questionDoc.user);
+    console.log(questionDoc.user.toString() !== user.id);
+    if (questionDoc.user.toString() !== user.id) {
+      return res.status(500).json({
+        success: false,
+        message: "You are not authorized to update or delete this question",
+      });
+    }
+
+    next();
+  } catch (err) {
+    return res.status(401).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
 
 module.exports = { auth, verifyQuestionOperation };
