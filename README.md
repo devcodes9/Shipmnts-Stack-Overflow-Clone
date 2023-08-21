@@ -3,7 +3,7 @@ Deployed link: <a>https://stack-overflow-backend-gjfm.onrender.com</a>
 <br>
 Postman API Documentation: <a>https://documenter.getpostman.com/view/17874220/2s9Y5Ty4UF</a>
 
-# To Install ANd Run:
+# To Install And Run:
 Clone the repository:
 git clone https://github.com/devcodes9/Shipmnts-Stack-Overflow-Clone.git
 
@@ -20,3 +20,15 @@ JWT_SECRET=deviscoding
 
 Run the project:
 node server.js
+
+# Key Points about this Project:
+-> Deployed <br>
+-> Implemented JWT Authentication<br>
+-> All necessary routes are protected routes<br>
+-> Implemented authorization using auth middleware<br>
+-> Database schema designed to be efficient (i.e. less read and write operations) using reference between documents of different collections<br>
+-> Used enum of upvote/downvote for voteType mongodb field<br>
+-> Searching and sorting for questions is done using database indexing for faster search results<br>
+-> Maintainable and Modular Folder structure<br>
+-> Error handling acheived through try...catch and various Validations which are used wherever required<br>
+-> Scope for API version control<br>
