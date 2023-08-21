@@ -26,6 +26,13 @@ const userSchema = new Schema(
       type: Number,
       trim: true,
     },
+    voteList: [
+      {
+        question: { type: Schema.Types.ObjectId, ref: "Question" },
+        answer: { type: Schema.Types.ObjectId, ref: "Answer" },
+        voteType: { type: String, enum: ["upvote", "downvote"], required: true},
+      }
+    ]
   },
   { timestamps: true }
 );
