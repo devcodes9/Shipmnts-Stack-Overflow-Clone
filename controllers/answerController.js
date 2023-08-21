@@ -1,7 +1,7 @@
 const Answer = require("../models/Answer");
 const Question = require("../models/Question");
 const User = require("../models/User");
-const  validateVoteType  = require("../utils/validation");
+const { validateVoteType } = require("../utils/validation");
 
 const createAnswer = async (req, res) => {
   try {
@@ -52,7 +52,7 @@ const voteAnswer = async (req, res) => {
     const { answer, voteType } = req.body;
     const userId = req.user.id;
 
-    if (!voteType || (voteType !== "upvote" && voteType !== "downvote")) {
+    if (validateVoteType(voteType)) {
       return res.status(400).json({
         success: false,
         message: "Invalid voteType",
@@ -69,7 +69,7 @@ const voteAnswer = async (req, res) => {
     }
 
     const user = await User.findById(userId);
-    console.log("I am the user: ", user);
+    console.log("I am the user: ", user)
     const voteIdx = user.voteList.findIndex(
       (vote) => vote.answer && vote.answer.toString() === answer
     );
@@ -78,7 +78,7 @@ const voteAnswer = async (req, res) => {
 
     if (voteIdx !== -1) {
       // to able to change the vote Type
-      if (!voteType || (voteType !== "upvote" && voteType !== "downvote")) {
+      if (voteType === user.voteList[voteIdx].voteType) {
         flag = true;
 
         return res.status(401).json({
@@ -106,7 +106,7 @@ const voteAnswer = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: `Answer ${voteType} done successfully`,
-      data: answerDoc,
+      data: answerDoc
     });
   } catch (err) {
     res.status(500).json({
