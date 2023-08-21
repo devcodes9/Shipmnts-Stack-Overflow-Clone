@@ -8,7 +8,6 @@ const auth = async (req, res, next) => {
       req.body.token ||
       req.header("Authorization").replace("Bearer ", "");
 
-    console.log(token);
     if (!token) {
       return res
         .status(401)
@@ -17,7 +16,7 @@ const auth = async (req, res, next) => {
 
     try {
       const decode = await jwt.verify(token, process.env.JWT_SECRET);
-      console.log(decode);
+
       req.user = decode;
     } catch (err) {
       return res.status(401).json({ success: false, message: "Invalid token" });
@@ -37,7 +36,7 @@ const verifyQuestionOperation = async (req, res, next) => {
     const user = req.user;
     const id = req.params.id;
     const questionDoc = await Question.findById(id);
-    console.log(questionDoc);
+
 
     if (!questionDoc) {
       return res.status(401).json({
@@ -45,8 +44,8 @@ const verifyQuestionOperation = async (req, res, next) => {
         message: "Question not found",
       });
     }
-    console.log("Verify", questionDoc.user);
-    console.log(questionDoc.user.toString() !== user.id);
+
+
     if (questionDoc.user.toString() !== user.id) {
       return res.status(500).json({
         success: false,
