@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const authRouter = require('./routes/authRouter')
 const questionRouter = require("./routes/questionRouter");
 const answerRouter = require("./routes/answerRouter");
+const commentRouter = require("./routes/commentRouter");
+const searchSortRouter = require("./routes/searchSortRouter");
 
 dotenv.config();
 
@@ -19,6 +21,8 @@ app.use(cors());
 app.use("/api/v1", authRouter);
 app.use("/api/v1/question", questionRouter);
 app.use("/api/v1/answer", answerRouter);
+app.use("/api/v1/comment", commentRouter);
+app.use("/api/v1/search", searchSortRouter);
 
 const connect = async () => {
   try{
